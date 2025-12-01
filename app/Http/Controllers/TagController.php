@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tag;
 
 class TagController extends Controller
 {
@@ -15,7 +16,12 @@ class TagController extends Controller
     }
 
     public function store(Request $request){
-        // Validate and store the tag
+        $data = $request->validate([
+            'name' => 'required|string|max:255|unique:tags,name',
+        ]);
+
+        Tag::create($data);
+        return redirect()->route('notes.index')->with('success', 'Etiqueta creada exitosamente.');
     }
 
     public function edit($id){

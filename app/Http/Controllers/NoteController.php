@@ -3,19 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Note;
+use App\Models\Tag;
 
 class NoteController extends Controller
 {
     public function index(){
-        return view('notes.index');
+        $notes = Note::orderBy('created_at', 'desc')->get();
+        return view('notes.index', compact('notes'));
     }
 
     public function create(){
-        return view('notes.create');
+        $tags = Tag::all();
+        return view('notes.create', compact('tags'));
     }
 
     public function store(Request $request){
-        // Validate and store the note
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id',
+        ]);
+
+        $note = Note::create($data);
+
+        if($request->filled('tags')){
+            $note->tags()->sync($request->tags);
+        }
+        
+        return redirect()->route('notes.index')->with('success', 'Nota creada exitosamente.');
     }
 
     public function show($id){

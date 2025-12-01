@@ -14,7 +14,6 @@ Route::resource('tags', TagController::class)->except(['show']);
 
 
 
-
 // Route::get('/', [NoteController::class, 'index'])->name('notes.index');
 
 // Route::get('/notes/create', [NoteController::class, 'create'])->name('notes.create');
