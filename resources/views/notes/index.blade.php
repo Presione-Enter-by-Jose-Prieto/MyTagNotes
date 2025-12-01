@@ -15,12 +15,20 @@
     <div>
         <ul>
             @forelse ($notes as $note)
-                <li>
-                    <strong>{{ $note->title }}</strong>
-                    <br>
-                    {{ $note->content }}
-                    <br><br>
-                </li>
+                <a href="{{ route('notes.show', $note) }}">
+                    <li class="rounded-xl border mb-4 p-2 flex flex-row justify-between items-center">
+                        <div>
+                            <strong>{{ $note->title }}</strong> - {{ $note->created_at->isoFormat('LL') }}
+                        </div>
+                        <div class="flex flex-row items-center">
+                            @foreach($note->tags as $tag)
+                                <span class="inline-block bg-blue-200 text-blue-800 text-xs px-2 py-1 rounded-full mr-2">
+                                    {{ $tag->name }}
+                                </span>
+                            @endforeach
+                        </div>
+                    </li>
+                </a>
             @empty
                 <li class="text-center">No hay notas disponibles.</li>
             @endforelse

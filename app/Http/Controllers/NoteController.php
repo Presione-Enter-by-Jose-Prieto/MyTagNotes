@@ -9,7 +9,7 @@ use App\Models\Tag;
 class NoteController extends Controller
 {
     public function index(){
-        $notes = Note::orderBy('created_at', 'desc')->get();
+        $notes = Note::with('tags')->orderBy('created_at', 'desc')->get();
         return view('notes.index', compact('notes'));
     }
 
@@ -31,12 +31,13 @@ class NoteController extends Controller
         if($request->filled('tags')){
             $note->tags()->sync($request->tags);
         }
-        
+
         return redirect()->route('notes.index')->with('success', 'Nota creada exitosamente.');
     }
 
     public function show($id){
-        return view('notes.show');
+        $note = Note::with('tags')->findOrFail($id);
+        return view('notes.show', compact('note'));
     }
 
     public function edit($id){
