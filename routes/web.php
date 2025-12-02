@@ -10,7 +10,7 @@ Route::get('/', function () {
 });
 
 Route::resource('notes', NoteController::class);
-Route::resource('tags', TagController::class)->except(['show']);
+Route::resource('tags', TagController::class)->except(['show', 'index']);
 
 
 
