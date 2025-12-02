@@ -58,13 +58,10 @@
         @enderror
     </div>
 
-    {{-- Botón --}}
-    <button 
-        type="submit" 
-        class="bg-blue-600 text-white px-4 py-2 rounded"
-    >
-        Guardar cambios
-    </button>
+    <div class="flex justify-end gap-2">
+        <x-boton-gris href="{{ route('notes.index') }}">Cancelar</x-boton-gris>
+        <x-boton-rojo type="submit">Actualizar Nota</x-boton-rojo>
+    </div>
 </form>
 
 @endsection

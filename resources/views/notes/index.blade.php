@@ -31,7 +31,7 @@
                         </div>
                         <div class="flex flex-row gap-2">
                             <x-boton-gris href="{{ route('notes.edit', $note) }}">Editar</x-boton-gris>
-                            <form action="{{ route('notes.destroy', $note) }}">
+                            <form action="{{ route('notes.destroy', $note) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <x-boton-rojo type="submit">Eliminar</x-boton-rojo>

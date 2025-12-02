@@ -65,6 +65,9 @@ class NoteController extends Controller
     }
 
     public function destroy($id){
-        // Delete a specific note
+        $note = Note::findOrFail($id);
+        $note->tags()->detach();
+        $note->delete();
+        return redirect()->route('notes.index')->with('success', 'Nota eliminada exitosamente.');
     }
 }
