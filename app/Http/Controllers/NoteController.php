@@ -40,12 +40,28 @@ class NoteController extends Controller
         return view('notes.show', compact('note'));
     }
 
-    public function edit($id){
-        return view('notes.edit');
+    public function edit(Note $note){
+        $tags = Tag::all(); // todas las etiquetas disponibles
+        $note->load('tags'); // carga las etiquetas de la nota
+
+        return view('notes.edit', compact('note', 'tags'));
     }
 
     public function update(Request $request, $id){
-        // Validate and update the note
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id',
+        ]);
+        $note = Note::findOrFail($id);
+        $note->update($data);
+        if($request->filled('tags')){
+            $note->tags()->sync($request->tags);
+        } else {
+            $note->tags()->detach();
+        }
+        return redirect()->route('notes.index')->with('success', 'Nota actualizada exitosamente.');
     }
 
     public function destroy($id){

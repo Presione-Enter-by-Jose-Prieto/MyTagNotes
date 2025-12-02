@@ -17,7 +17,7 @@
             </div>
             <div class="flex flex-row gap-2 justify-end">
                 <x-boton-gris href="{{ route('tags.create') }}">Cancelar</x-boton-gris>
-                <x-boton-verde type="submit">Guardar Etiqueta</x-boton-verde>
+                <x-boton-azul type="submit">Guardar Etiqueta</x-boton-azul>
             </div>
         </form>
     </div>

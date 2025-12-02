@@ -32,7 +32,7 @@
             </div>
             <div class="flex flex-row gap-2 justify-end">
                 <x-boton-gris href="{{ route('notes.index') }}">Cancelar</x-boton-gris>
-                <x-boton-verde type="submit">Guardar Nota</x-boton-verde>
+                <x-boton-azul type="submit">Guardar Nota</x-boton-azul>
             </div>
         </form>
     </div>
