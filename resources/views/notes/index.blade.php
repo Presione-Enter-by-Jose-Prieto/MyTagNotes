@@ -16,17 +16,13 @@
         <ul>
             @forelse ($notes as $note)
                 <a href="{{ route('notes.show', $note) }}">
-                    <li class="rounded-xl border mb-4 p-2 flex flex-row justify-between items-center">
+                    <li 
+                     class="rounded-xl border mb-4 px-3 py-2 flex flex-row justify-between items-center bg-gray-100
+                     border-gray-300"
+                    >
                         <div class="flex gap-3">
-                            <div>
-                                <strong>{{ $note->title }}</strong> - {{ $note->created_at->isoFormat('LL') }}
-                            </div>
-                            <div class="flex flex-row items-center">
-                                @foreach($note->tags as $tag)
-                                    <span class="inline-block bg-blue-200 text-blue-800 text-xs px-2 py-1 rounded-full mr-2">
-                                        {{ $tag->name }}
-                                    </span>
-                                @endforeach
+                            <div class="text-gray-400">
+                                <strong class="text-gray-600">{{ $note->title }}</strong> - {{ $note->created_at->isoFormat('LL') }}
                             </div>
                         </div>
                         <div class="flex flex-row gap-2">
